@@ -19,4 +19,4 @@ This is the result, which also includes a few handy latex tricks to polish the w
 
 Feel free to use this template or look at the pre-build [overleaf version](https://www.overleaf.com/read/vbpjdtcqpwyn).
 
-**By using this template you are required to include a reference in your writing according to the [LICENSE](https://creativecommons.org/licenses/by-sa/4.0).**
+**By using this template you are required to include a reference in your writing according to the [LICENSE](https://creativecommons.org/licenses/by-sa/3.0).**
