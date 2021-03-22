@@ -15,6 +15,22 @@ This is the result, which also includes a few handy latex tricks to polish the w
 ## 🤞 Usage
 - you need to use lualatex
 
+<pre>
+project/
+├── data/
+│   ├── campus_logo.png (<i>logo with color</i>)
+│   ├── campus_logo_bk.png (<i>logo with black and white</i>)
+│   ├── library.bib (<b>put your sources here</b>)
+├── sections/ (<b>put your text here and \input{} it within the main.tex</b>) 
+│   ├── abstract.tex
+│   └── example.tex (<i>outlines different commands</i>)
+├── setup/ (<i>you know what you do? then edit here</i>)
+│   └── ...
+├── LICENSE
+├── README.md 
+└── main.tex (<b>start file</b>)
+</pre>
+
 ## 🌿 Honor where honor is due 
 
 Feel free to use this template or look at the pre-build overleaf version.
