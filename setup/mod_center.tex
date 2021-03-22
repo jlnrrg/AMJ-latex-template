@@ -1,0 +1,8 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Center modification
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\let\oldcenter\center
+	\let\oldendcenter\endcenter
+	\renewenvironment{center}{\setlength\topsep{5ex}\oldcenter}{\oldendcenter}

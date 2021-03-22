@@ -1,0 +1,30 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sections
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	%\RedeclareSectionCommand[font=\centering\Large\uppercase]{section}
+	\renewcommand*{\sectionformat}{} % no Number, capitalization
+	\RedeclareSectionCommand[font=\centering\Large]{section}
+	
+	\renewcommand*{\subsectionformat}{} % no number 
+	\renewcommand*{\subsubsectionformat}{} % no number 
+	
+	\RedeclareSectionCommand[font=\itshape]{paragraph}
+	
+	% Header Text Format
+	\makeatletter
+	
+	%\renewcommand\chapterlinesformat[3]{
+	%	\@hangfrom{#2}{#3}
+	%}
+	
+	\renewcommand\sectionlinesformat[4]{% only works on one line header, not inline
+		\ifstr{#1}{section}{\@hangfrom{\hskip#2#3}{\uppercase{#4}}}{%
+			\ifstr{#1}{subsection}{\@hangfrom{\hskip#2#3}{#4}}{%
+				\ifstr{#1}{subsubsection}{\@hangfrom{\hskip#2#3}{#4}}{%
+					\ifstr{#1}{paragraph}{\@hangfrom{\hskip#2#3}{#4}}{%
+						\ifstr{#1}{subparagraph}{\@hangfrom{\hskip#2#3}{#4}}{%
+							\@hangfrom{\hskip#2#3}{#4}% original definition for other section levels
+	}}}}}}
+	\makeatother

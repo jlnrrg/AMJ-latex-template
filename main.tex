@@ -1,0 +1,158 @@
+\documentclass[
+	english,
+	%twoside=true,
+	letterpaper,
+	%	a4paper,
+	%parskip=full,
+	12pt
+]{scrartcl}
+\usepackage{ifthen}
+\newboolean{color} 
+\setboolean{color}{false} % if you like to view your creation in color with another font, set to true
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Orientation
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\usepackage[
+		letterpaper,
+		left=2.54cm,
+		right=2.54cm,
+		top=2.54cm,
+		%	headsep=0.5cm,
+		%	footskip=1cm, %0.75cm,
+		bottom=2.54cm,
+%			showframe,
+	]{geometry}
+
+\input{setup/packages}
+\input{setup/mod_floatend}
+\input{setup/mod_library}
+\input{setup/mod_sections}
+\input{setup/mod_center}
+\input{setup/mod_tablerow}
+\input{setup/mod_anonymize}
+\input{setup/mod_other}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Settings
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\clubpenalty = 10000
+	\widowpenalty = 10000
+	\displaywidowpenalty = 10000
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% META
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\usepackage{censor}
+
+	\ifthenelse{\boolean{color}}{%
+		\newcommand{\logoPath}{data/campus_logo}}{%
+		\newcommand{\logoPath}{data/campus_logo_bk}}
+	
+	\title{Example Title}
+	\author{\censor{censored name}}
+	\date{}
+	\newcommand{\matrikelnr}{number}
+	\newcommand{\degree}{Master of Science (M.Sc.)}
+	\newcommand{\course}{course}
+	\newcommand{\firstexaminer}{prof. first examiner}
+	\newcommand{\secondexaminer}{dr. second examiner}
+	\newcommand{\startdate}{1. January 2020}
+	\newcommand{\finishdate}{20. August 2020}
+	\newcommand{\university}{\includegraphics[scale=1.10]{\logoPath}}
+	\newcommand{\uniaddress}{street\\ place}
+	\newcommand{\rsquestion}{What should a good research question entail?}
+	\newcommand{\rsframework}{Research Framework }
+	\newcommand{\rsframeworks}{Research Framework's }
+	\newcommand{\runkeywords}{keyword1, keyword2, keyword3}
+	
+	
+	\makeatletter
+		\let\runtitle\@title
+		\let\runauthor\@author
+	\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Header and Footer
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\usepackage{lastpage} % Last Page
+	\usepackage[autooneside=false,automark]{scrlayer-scrpage}
+		\renewcommand\sectionmarkformat{} % removes numbers of header in header
+		\renewcommand\subsectionmarkformat{}
+		\clearpairofpagestyles
+	
+	\ihead{\small\runtitle} % left
+	\ohead{\large\pagemark} % right
+	\ifoot{\large \runauthor}
+	\cfoot{\includegraphics[scale=0.6]{\logoPath}}
+	\ofoot{\normalsize\leftmark} % footer outside
+
+\input{setup/mod_library} % AMJ Library modifications
+\input{setup/mod_custom_commands} 
+\input{setup/packages_last}
+
+\begin{document}
+	\onehalfspacing
+	\pagenumbering{Alph} %just for the title page, so backref page works
+	\begin{titlepage}
+	{\centering
+		{\Large\textbf{\runtitle}\par}
+		\vspace{0.5cm}
+		{\textbf{author:} \\ \runauthor \par}
+		{(student-nr: \matrikelnr)\par}
+		\vspace{0.5cm}
+		{\textbf{course:} \\ \degree\par \course\par}
+		\vspace{0.5cm}
+		{\university\par}
+		{\uniaddress} \\
+		\vspace{0.5cm}
+		{\textbf{assessor:} \firstexaminer\par}
+		{\textbf{co-assessor:} \secondexaminer\par}
+		
+		\vspace{0.5cm}
+		
+		{\textbf{startdate:} \startdate\par}
+		{\textbf{hand in date:} \finishdate\par}
+		
+		\vspace{1cm}
+		
+		{\Large \textbf{ABSTRACT}\par}
+		\vspace{0.25cm}
+	}
+	    \input{sections/abstract}
+		\vfill
+		\textbf{Keywords} \runkeywords 
+	\end{titlepage} 
+	\pagenumbering{Roman}
+	\setcounter{page}{1}
+	
+\newpage
+	\pagenumbering{arabic}
+	\setcounter{page}{1}
+	
+	\input{sections/example}
+	\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	
+	
+%TC:ignore 
+	\newpage
+	\pagenumbering{Roman}
+	\defbibheading{bibliography}{\section{References}}
+	\printbibliography
+
+	\newpage
+	\ofoot{Appendix}
+	\appendix\setlength{\parindent}{0cm}
+		\clearpage
+		\processdelayedfloats
+		\clearpage
+%TC:endignore 
+\end{document}

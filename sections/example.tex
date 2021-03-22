@@ -1,0 +1,103 @@
+\section{Example}
+    \subsection{Table}
+    \begin{table}
+				\tabcaption{Participants}
+				\label{tab:participants}
+				\begin{ThreePartTable}
+					\begin{TableNotes}[labelindent=10pt,leftmargin=2.2cm]\footnotesize
+						\item[1] \faPlus\ - >= 30 \\
+						\faMinus\ - < 30 
+						\item[2] \faBattery[0] - no experience\\
+						\faBattery[1] - < 3 month \\
+						\faBattery[2] - < 1.5 years \\
+						\faBattery[3] - < 3 years\\
+						\faBattery[4] - >= 3 years
+						\item[3]\faBattery[0] - 0 styles\\
+						\faBattery[1] - 1 style \\
+						\faBattery[2] - 2-3 styles \\
+						\faBattery[3] - 4-5 styles\\
+						\faBattery[4] - > 5 styles
+					\end{TableNotes}
+					
+					
+					\newboolean{showNames} 
+					\setboolean{showNames}{false}
+					\arrayrulecolor{Red}
+					\begin{longtable}{c|ccccclccc}
+						\toprule
+						\thead{participant} & \thead{gender} & \thead{age\tnote{1}} & \thead{experience\tnote{2}} & \thead{teaches\\(professional)} & \thead{different styles\tnote{3}} \ifthenelse{\boolean{showNames}}{& \thead{name}\\}{\\}	
+						\midrule
+						\endhead		
+						
+						\faHashtag\textbf{\rownumber} & \male & \faMinus & \faBattery[3] & \false & \faBattery[3] \ifthenelse{\boolean{showNames}}{& Hendrick\\}{\\} %Hendrick
+						\faHashtag\textbf{\rownumber} & \male & \faMinus & \faBattery[2] & \false & \faBattery[2] \ifthenelse{\boolean{showNames}}{& David\\}{\\} %David %Informatiker
+						\faHashtag\textbf{\rownumber} & \female & \faPlus & \faBattery[4] & \true & \faBattery[3] \ifthenelse{\boolean{showNames}}{& Sabine\\}{\\} %Sabine
+						\faHashtag\textbf{\rownumber} & \male & \faMinus & \faBattery[3] & \true & \faBattery[1] \ifthenelse{\boolean{showNames}}{& Philip\\}{\\} %Philip
+						\faHashtag\textbf{\rownumber} & \male & \faPlus & \faBattery[2] & \false & \faBattery[1] \ifthenelse{\boolean{showNames}}{& Oliver\\}{\\} %Oliver Forró
+						\faHashtag\textbf{\rownumber} & \female & \faMinus & \faBattery[3] & \false & \faBattery[4] \ifthenelse{\boolean{showNames}}{& Nadine\\}{\\} %Nadine
+						\faHashtag\textbf{\rownumber} & \female & \faMinus & \faBattery[2] & \true & \faBattery[3] \ifthenelse{\boolean{showNames}}{& Melissa\\}{\\} %Melissa
+						\faHashtag\textbf{\rownumber} & \male & \faMinus & \faBattery[1] & \false & \faBattery[1] \ifthenelse{\boolean{showNames}}{& Jerome\\}{\\} %Jerome
+						\faHashtag\textbf{\rownumber} & \male & \faMinus & \faBattery[1] & \false & \faBattery[1] \ifthenelse{\boolean{showNames}}{& David A\\}{\\} %David A
+						\faHashtag\textbf{\rownumber} & \female & \faMinus & \faBattery[1] & \false & \faBattery[1] \ifthenelse{\boolean{showNames}}{& Lena\\}{\\} %Lena
+						\faHashtag\textbf{\rownumber} & \male & \faMinus & \faBattery[4] & \false & \faBattery[4] \ifthenelse{\boolean{showNames}}{& Maik\\}{\\} %Maik
+						\faHashtag\textbf{\rownumber} & \male & \faPlus & \faBattery[4] & \true & \faBattery[3] \ifthenelse{\boolean{showNames}}{& Anatol\\}{\\} %Anatol
+						\faHashtag\textbf{\rownumber} & \male & \faPlus & \faBattery[4] & \true & \faBattery[2] \ifthenelse{\boolean{showNames}}{& Olli\\}{\\} %Olli Tango
+						\faHashtag\textbf{\rownumber} & \female & \faMinus & \faBattery[4] & \false & \faBattery[2] \ifthenelse{\boolean{showNames}}{& Helena\\}{\\} %Helena
+						\faHashtag\textbf{\rownumber} & \male & \faPlus & \faBattery[4] & \false & \faBattery[2] \ifthenelse{\boolean{showNames}}{& Alex\\}{\\} %Alex - macht irgendwas mit Computern
+						\faHashtag\textbf{\rownumber} & \female & \faMinus & \faBattery[4] & \false & \faBattery[4] \ifthenelse{\boolean{showNames}}{& Hanna\\}{\\} %Hanna
+						\faHashtag\textbf{\rownumber} & \female & \faMinus & \faBattery[1] & \false & \faBattery[3] \ifthenelse{\boolean{showNames}}{& Hannah\\}{\\} %Hannah
+						\bottomrule
+						\insertTableNotes
+					\end{longtable}
+				\end{ThreePartTable}
+			\end{table}
+			
+    \subsection{Figure}
+        \begin{figure}[!ht]
+%				\centering
+				\figurecaption{Interview - Introduction}
+				\label{fig:Introduction}
+				\vspace{1em}
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+			\end{figure}
+			
+			\begin{figure}[!ht]
+				\centering
+				\figurecaption[Interview - Topics]{Interview - Topics \parencite[cf.][46]{o2010sustainability}}
+				\label{fig:TopicList}
+				\vspace{1em}
+				\begin{compactenum}[A)]%[label=\Alph*)]
+					\item Topic 1
+					\item Topic 2
+					\item Topic 3
+					\item Topic 4
+					\item Topic 5
+					\item Topic 6
+					\item Topic 7
+				\end{compactenum}
+			\end{figure}
+			
+	\subsection{Library citation}
+	    \textbf{The citations are not correct and just for example purpose}
+	    
+		\begin{compactitem} % [A)]%[label=\Alph*)]
+    	    \item Multiple citations:  \parencite{o2005planning, o2010sustainability}
+    	    \item cite with page: \parencite[][289]{bryman2011}
+    	    \item secondary citations: \pconnectcites(as cited in){o2010sustainability}{bryman2011}
+    	    \item cite the author:  \citeauthor{o2010sustainability}
+    	    \item secondary citations with multiple entries:  \pconnectcites(as cited in){o2005planning, o2010sustainability, simon2020dancing, simpson2012student}{wiki}
+    	    \item secondary citations with page ref:  \pconnectcites(as cited in){simpson2012student}[cf.][188]{bryman2011}
+    	    \item inline text citation:  \textcite[cf.][218]{bryman2011} outlined a quote
+    	    \item footnote\footnote{this is the footnote with a citation \parencite[cf.][]{wiki}.}
+	    \end{compactitem}
+	    
+	 \subsection{Reference}\label{sec:example_reference}
+	    capitalcase see: \Cref{sec:example_reference}
+	    
+	    lowercase see: \cref{sec:example_reference} 
+	    
+	    ref table: \Cref{tab:participants}
+	    
+	    ref figure: \Cref{fig:Introduction}
+	    
+	    ref table counter: \total{tabCounter:Participants} participants

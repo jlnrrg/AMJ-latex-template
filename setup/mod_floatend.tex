@@ -1,0 +1,82 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Floadend modification
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[nolists]{endfloat} % push figues to the end floating
+	\renewcommand{\efloatseparator}{} %\mbox{}}
+
+%https://tex.stackexchange.com/questions/291603/how-to-put-hyperlinks-in-endfloats-markers
+
+%https://github.com/seananderson/paleobaselines/blob/master/analysis/endfloat.dtx
+
+\usepackage{ifthen}
+\newlength{\InsertHere}
+
+\makeatletter
+\renewcommand{\floatplace}[1]{% #1 = float type (e.g. figure)
+	\begin{center}
+		\def\floatnumber{\csname thepost#1\endcsname}
+		\def\floatname{\csname #1name\endcsname}
+		
+		\ifthenelse{\equal{#1}{figure}}% define backlink based on figure or table
+		{\def\backlink{figureback\floatnumber}}%
+		{\def\backlink{tableback\floatnumber}}%
+		
+%		\colorbox{yellow}{\floatname}
+%		\colorbox{red}{\backlink}
+%		
+%		\colorbox{orange}{\floatnumber}
+%		\colorbox{green}{\csname #1anchor\floatnumber\endcsname}
+		
+		
+		\settowidth{\InsertHere}{Insert \floatname~\floatnumber\ about here.}
+		
+		\hypertarget{\backlink}{}
+		\@ifundefined{#1anchor\floatnumber}%
+		{\vbox{\rule{\the\InsertHere}{1pt}\\Insert \floatname~\floatnumber\ about here.\\[-0.5em]\rule{\the\InsertHere}{1pt}}}%
+		{\vbox{\rule{\the\InsertHere}{1pt}\\Insert \hyperlink{\csname #1anchor\floatnumber\endcsname}%
+		{\floatname~\floatnumber\ }about here.\\[-0.5em]\rule{\the\InsertHere}{1pt}}}
+	\end{center}
+}
+
+%for figure
+\newcommand{\figurecaption}[2][\empty]% #1=short caption (optional), #2=caption
+{%
+	\ifx\empty#1\relax %
+	\caption[#2]{\hyperlink{figureback\thefigure}{#2}}%
+	\else %
+	\caption[#1]{\hyperlink{figureback\thefigure}{#2}}%
+	\fi
+	\immediate\write\@auxout{\string\newfigure{\thefigure}{\@currentHref}}%
+}
+\makeatother
+
+\newcommand{\newfigure}[2]% #1 = \thefigure, #2 = \@currentHref
+{\expandafter\gdef\csname figureanchor#1\endcsname{#2}}
+
+
+%for table
+\makeatletter
+\newcommand{\setTableTemplate}[1]{%
+	\renewcommand*{\tabCaptionSave}{#1}%
+	\newtotcounter{tabCounter:#1}%
+	\setcounter{tabCounter:#1}{0}%
+	\renewcommand*{\tabCounterSave}{tabCounter:#1}%
+}
+
+\newcommand{\tabcaption}[2][\empty]% #1=short caption (optional), #2=caption
+{%
+	\ifx\empty#1\relax %
+		\caption[#2]{\hyperlink{tableback\thetable}{#2}}%
+		\setTableTemplate{#2}%
+	\else %
+		\caption[#1]{\hyperlink{tableback\thetable}{#2}}%
+		\setTableTemplate{#1}%
+	\fi
+	\immediate\write\@auxout{\string\newtable{\thetable}{\@currentHref}}%
+}
+\makeatother
+
+\newcommand{\newtable}[2]% #1 = \thetable, #2 = \@currentHref
+{\expandafter\gdef\csname tableanchor#1\endcsname{#2}}

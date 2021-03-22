@@ -1,0 +1,131 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Library modification
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	\usepackage[
+		backend=biber,
+		style=authoryear,
+		sorting=nyt,
+		minnames=1,
+		maxbibnames=99,
+%		backref=true,
+		maxcitenames=1,%modified
+		citetracker=true,%added
+		dashed=false,
+		giveninits=true,
+		urldate=long,
+		dateabbrev=false
+	]{biblatex}
+	\bibliography{data/library.bib}
+	
+	% Umbrüche im Quellenverzeichnis verbessern
+	\setcounter{biburllcpenalty}{7000}
+	\setcounter{biburlucpenalty}{8000}	
+	\renewcommand*{\nameyeardelim}{\addcomma\space} %add comma between author and year
+	\renewcommand*{\finalnamedelim}{% replace last comma by &
+		\ifnumgreater{\value{liststop}}{2}{\finalandcomma}{}%
+		\addspace\&\space}
+	\renewcommand*{\finalandcomma}{}% no final comma before and
+	\AtBeginDocument{\renewcommand\finalandcomma{}}% no comma before &
+	\AtBeginBibliography{%& instead of and
+		\renewcommand*{\finalnamedelim}{%
+			\ifnumgreater{\value{liststop}}{2}{\finalandcomma}{}%
+			\addspace\&\space}
+	}
+	\renewcommand{\postnotedelim}{:\space}% delimter before page
+	\DeclareFieldFormat{postnote}{#1}% no "p. "
+	
+	
+	\renewcommand{\bibpagespunct}{:\space}% delimter before page in bibliography
+	\DeclareFieldFormat{pages}{#1}% no "p. in bibliography"
+	
+	\renewcommand\multicitedelim{\addsemicolon\space} % semicolon between multiple authors
+	
+	%patches (if number of authers is lower equal 6, cite all authors the first time)
+	\usepackage{xpatch}
+	\xpatchbibmacro{cite}{\printnames{labelname}}%
+	{\ifnumgreater{\the\value{author}}{6}%
+		{\printnames{labelname}}%
+		{\ifciteseen%
+			{\ifnumgreater{\the\value{author}}{2}%
+				{\printnames{labelname}}%
+				{\printnames[][-\value{listtotal}]{labelname}}%			
+			}%
+			{\printnames[][-\value{listtotal}]{labelname}}% print all if cite not seen
+		}%
+	}{}{}
+	
+	\xpatchbibmacro{textcite}{\printnames{labelname}}%
+	{\ifnumgreater{\the\value{author}}{6}%
+		{\printnames{labelname}}%
+		{\ifciteseen%
+			{\ifnumgreater{\the\value{author}}{2}%
+				{\printnames{labelname}}%
+				{\printnames[][-\value{listtotal}]{labelname}}%			
+			}%
+			{\printnames[][-\value{listtotal}]{labelname}}% print all if cite not seen
+		}%
+	}{}{}
+	
+	%secondary citation %https://tex.stackexchange.com/questions/213185/what-is-the-most-elegant-way-to-cite-two-things-connected-by-a-joining-word-wi
+	\newbibmacro*{connectcites:multipostnote}{%
+%		\setunit{\addcomma\space}%
+		\setunit{\space}%
+		\iffieldundef{multipostnote}
+		{\printtext{quoting}}
+		{\printfield{multipostnote}\clearfield{multipostnote}}%
+		\space}
+	\DeclareMultiCiteCommand{\pconnectcites}[\mkbibparens]{\parencite}{\usebibmacro{connectcites:multipostnote}}
+	
+	\DeclareFieldFormat*{title}{#1\isdot} %bibtex reference title = title.
+	
+	%period year period, instead of brackets
+	\xpatchbibmacro{date+extradate}{%
+		\printtext[parens]%
+	}{%
+		\setunit{\addperiod\space}%
+		\printtext%
+	}{}{}
+	\DeclareNameAlias{sortname}{family-given} %always lastname first
+	
+	\renewbibmacro{in:}{} %remove in: for where article is from
+	\DeclareFieldFormat{journaltitle}{\mkbibbold{\mkbibemph{#1}}\isdot}
+	
+	\renewbibmacro*{journal+issuetitle}{%
+		\usebibmacro{journal}%
+		\setunit*{\addcomma\space}%
+		\iffieldundef{series}
+		{}
+		{\newunit
+			\printfield{series}%
+			\setunit{\addspace}}%
+		\usebibmacro{volume+number+eid}%
+		\setunit{\addspace}%
+		\usebibmacro{issue+date}%
+		\setunit{\addcolon\space}%
+		\usebibmacro{issue}%
+	\newunit}
+	
+	\DeclareFieldFormat[article,book,inproceedings]{volume}{#1}
+	\DeclareFieldFormat[article,book,inproceedings]{number}{(#1)}
+	\DeclareFieldFormat{edition}{%
+		\ifinteger{#1}
+		{(\mkbibordedition{#1} \bibstring{edition})}
+		{(#1\isdot)}}
+	
+	\renewbibmacro*{volume+number+eid}{%
+		\printfield{volume}%
+		%  \setunit*{\adddot}% DELETED
+%		\setunit*{\addcomma\space}% NEW (optional); there's also \addnbthinspace
+		\printfield{number}%
+		\setunit{\addcomma\space}%
+		\printfield{eid}}
+	
+	\DeclareFieldFormat{url}{Accessed online \url{#1}}
+	\DeclareFieldFormat{urldate}{Viewed #1}
+	\renewbibmacro*{url+urldate}{%
+		\usebibmacro{url}%
+		\setunit*{\adddot\space}
+		\usebibmacro{urldate}%
+	}

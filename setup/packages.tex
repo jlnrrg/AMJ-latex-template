@@ -1,0 +1,71 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\usepackage{verbatim} % multiline comments
+	\usepackage{csquotes}
+	\usepackage[english]{babel}
+	\usepackage{graphicx}
+	\ifthenelse{\boolean{color}}{%
+		\usepackage[usenames,dvipsnames,table]{xcolor} % colors
+	}{%
+		\usepackage[monochrome,usenames,dvipsnames,table]{xcolor}}
+	
+	%Fonts
+	\usepackage{fontawesome} % Symbols, Emoji, etc. has to be loaded before other fonts
+%	\usepackage{fontspec}
+%		\setmainfont{TeX Gyre Termes}
+%		\setsansfont{TeX Gyre Termes}
+%		\setmonofont{TeX Gyre Termes}
+	\ifthenelse{\boolean{color}}{%
+%		\usepackage{fontspec}
+%	\usepackage[sfdefault]{FiraSans}
+		\usepackage{newtxmath,newtxtext}
+		\setkomafont{disposition}{\normalfont\bfseries}
+%		\setmainfont{FiraSans}
+%		\setsansfont{FiraSans}
+%		\setmonofont{FiraMono}
+%		\usepackage{microtype}
+	}{%
+		\usepackage{newtxmath,newtxtext}
+		\setkomafont{disposition}{\normalfont\bfseries}
+	}
+	
+	\usepackage[normalem]{ulem} % underline
+	\usepackage{amsmath}
+	\usepackage{hologo} % Context und Latex Symbole
+	\usepackage{caption}
+		\captionsetup[figure]{labelfont=bf}
+		\captionsetup[table]{labelfont=bf}
+	\usepackage{subcaption}
+	\usepackage{setspace}
+		\setlength{\parindent}{0pt} % no indent with new paragraph 
+	\usepackage{pdfpages} % import pdf
+	\usepackage{wrapfig} % Text flows around figures
+	\usepackage{threeparttable} % Table with notes
+	\usepackage{threeparttablex} % threeparttable works with longtable (breakable)
+	\usepackage{longtable} % Breakable Table
+	\usepackage{booktabs} % Table Rules
+	\usepackage{makecell} % table multi rows
+	\usepackage{enumitem}
+	\usepackage{paralist} % compact itemize
+	\usepackage{multicol} % 2 column itemize
+	\usepackage{odsfile}
+    	\tabletemplate{booktabs}{%
+    		\begin{tabular}{-{coltypes}}
+    			\toprule
+    			-{colheading}
+    			\midrule
+    			-{content}
+    			\bottomrule
+    		\end{tabular}
+    	}
+	
+	\usepackage{varwidth}
+	\usepackage{tikz}
+	\usetikzlibrary{arrows.meta,
+		decorations.pathreplacing,
+		calligraphy,% has to be after lib. decorations.pathreplacing
+		positioning,
+		shadows
+	}

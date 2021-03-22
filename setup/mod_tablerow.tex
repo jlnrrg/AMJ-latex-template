@@ -1,0 +1,30 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table rownumber
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%	Table Counter
+	\newcommand{\tabCaptionSave}{Test}
+	\newcommand{\tabCounterSave}{FillLater}
+	
+	\usepackage{array,etoolbox}
+	\usepackage{totcount}
+	\newcommand\rownumber{%
+%		\addtocounter{\expandafter\tabCounterSave}{1}%
+		\vadjust pre{% puts the ref one row up, so it is correct https://tex.stackexchange.com/questions/325450/jumping-to-hypertarget-in-a-longtable-lands-too-low-in-the-row
+			\refstepcounter{\expandafter\tabCounterSave}\label{tabrow:\tabCaptionSave\arabic{\expandafter\tabCounterSave}}%
+		}%
+		\arabic{\expandafter\tabCounterSave}%
+%		\addtocounter{\expandafter\tabCounterSave}{-1}% necessary, otherwise wrong hyperlink ref
+	}
+	
+	\makeatletter
+	\newif\ifLT@nocaption
+	\preto\longtable{\LT@nocaptiontrue}
+	\appto\endlongtable{%
+		\ifLT@nocaption
+		\addtocounter{table}{\m@ne}%
+		\fi}
+	\preto\LT@caption{%
+		\noalign{\global\LT@nocaptionfalse}}
+	\makeatother
