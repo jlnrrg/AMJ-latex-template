@@ -13,6 +13,10 @@ This is the result, which also includes a few handy latex tricks to polish the w
 - table entry counters
 
 ## 🤞 Usage
+
+Feel free to use this template or look at the pre-build [overleaf version](https://www.overleaf.com/read/vbpjdtcqpwyn) with you can copy according to the [tutorial](https://www.overleaf.com/learn/how-to/Copying_a_project#Making_a_copy_of_a_project).<br>
+To make the overleaf version work, you need to change your compiler to [LuaLaTeX](https://de.overleaf.com/learn/how-to/Changing_compiler)
+
 - you need to use lualatex
 
 <pre>
@@ -32,7 +36,5 @@ project/
 </pre>
 
 ## 🌿 Honor where honor is due 
-
-Feel free to use this template or look at the pre-build overleaf version.
 
 **By using this template you are required to include a reference in your writing according to the [LICENSE](https://creativecommons.org/licenses/by-sa/3.0).**
